@@ -1,0 +1,30 @@
+name: Flutter CI
+
+# 언제 실행할지 정의
+on:
+  push:
+    branches: [ "main" ]        # main 브랜치에 push 될 때 실행
+  pull_request:
+    branches: [ "main" ]        # PR이 main 브랜치를 대상으로 열리면 실행
+
+jobs:
+  build:
+    runs-on: ubuntu-latest      # Ubuntu 환경에서 실행
+
+    steps:
+      # 1) 소스 코드 체크아웃
+      - uses: actions/checkout@v4
+
+      # 2) Flutter 설치 (버전 지정 가능)
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.0"   # 원하는 Flutter 버전으로 수정하세요
+
+      # 3) 패키지 설치
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 4) 테스트 실행
+      - name: Run tests
+        run: flutter test
