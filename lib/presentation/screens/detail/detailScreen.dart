@@ -49,27 +49,21 @@ class DetailScreen extends ConsumerWidget {
 
           const SizedBox(height: 8),
 
-          Row(
-            children: [
-
-              //작성자
-              Text(
-                  article.author,
-                  style: titleTextStyle.articleAuthor
-              ),
-
-              const SizedBox(width: 8.0),
-
-              //날짜
-              Text(
-                  article.publishedAt ?? "",
-                  style: titleTextStyle.articleAuthor
-              ),
-
-            ],
+          //작성자
+          Text(
+              article.author,
+              style: titleTextStyle.articleAuthor
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 6.0),
+
+          //날짜
+          Text(
+              article.publishedAt ?? "",
+              style: titleTextStyle.articleAuthor
+          ),
+
+          const SizedBox(height: 12.0),
 
           //본문 내용
           SizedBox(
