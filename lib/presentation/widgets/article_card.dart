@@ -15,7 +15,7 @@ class ArticleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: InkWell(
+      child: GestureDetector(
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(12.0),

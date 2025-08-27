@@ -15,7 +15,7 @@ class TextUriButton extends StatelessWidget {
     final isBrightness = Theme.of(context).brightness == Brightness.light;
     final AppTextStyle appTextStyle = AppTextStyle(isThemeModeBrightness: isBrightness);
 
-    return InkWell(
+    return GestureDetector(
       onTap: () async {
         final urlLaunchRepositoryImpl = UrlLaunchRepositoryImpl();
         final openUrlLaunch = OpenUrlLaunch(urlLaunchRepository: urlLaunchRepositoryImpl, url: url);

@@ -29,6 +29,7 @@ class DetailScreen extends ConsumerWidget {
             ),
              onPressed: () => context.pop()
           ),
+
           title: Text(article.title)
       ),
       body: Column(
