@@ -10,4 +10,28 @@ class NewsRepositoryImpl implements NewsRepository {
     final articleModels = await _apiService.getTopHeadlines();
     return articleModels.map((model) => model.toEntity()).toList();
   }
+
+  @override
+  Future<List<Article>> getApple() async {
+    final articleModels = await _apiService.getApple();
+    return articleModels.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<List<Article>> getBitCoin() async {
+    final articleModels = await _apiService.getBitCoin();
+    return articleModels.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<List<Article>> getTechCrunchAndTheNextWeb() async {
+    final articleModels = await _apiService.getTechcrunchAndTheNextWeb();
+    return articleModels.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<List<Article>> getSearchArticles(String searchString) async {
+    final articleModels = await _apiService.getSearchArticles(searchString);
+    return articleModels.map((model) => model.toEntity()).toList();
+  }
 }

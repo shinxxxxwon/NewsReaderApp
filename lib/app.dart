@@ -11,6 +11,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       title: 'Flutter News Reader',
+
       theme: AppTheme.lightTheme,  // core/theme/app_theme.dart 에 정의
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,

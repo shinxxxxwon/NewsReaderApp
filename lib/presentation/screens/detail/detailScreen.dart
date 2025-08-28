@@ -5,7 +5,7 @@ import 'package:news_reader_app/domain/entities/article.dart';
 import 'package:news_reader_app/presentation/colors/app_color.dart';
 import 'package:news_reader_app/presentation/text/app_textStyle.dart';
 import 'package:news_reader_app/presentation/widgets/textUriButton.dart';
-import '../../providers/headlines_provider.dart';
+import '../../providers/news_provider.dart';
 import '../../widgets/article_card.dart';
 
 class DetailScreen extends ConsumerWidget {
@@ -72,7 +72,7 @@ class DetailScreen extends ConsumerWidget {
             child: Text(
               article.description ?? "",
               maxLines: 15,
-              style: titleTextStyle.articleDescription,
+              style: titleTextStyle.articleContent,
             ),
           ),
 

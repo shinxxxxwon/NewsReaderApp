@@ -26,16 +26,16 @@ class AppTextStyle {
   );
 
   //본문 스타일
-  TextStyle get articleDescription => TextStyle(
+  TextStyle get articleContent => TextStyle(
     color: isThemeModeBrightness ? appColor.black : appColor.white,
     fontWeight: FontWeight.w500,
-    fontSize: appTextSize.articleDescription,
+    fontSize: appTextSize.articleContent,
   );
 
   //원문 보기 버튼 스타일
   TextStyle get showOrigin => TextStyle(
     color: isThemeModeBrightness ? appColor.black : appColor.white,
     fontWeight: FontWeight.w500,
-    fontSize: appTextSize.articleDescription,
+    fontSize: appTextSize.articleContent,
   );
 }

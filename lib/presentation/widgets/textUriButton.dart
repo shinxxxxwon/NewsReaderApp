@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_reader_app/data/repositories/urlLaunch_repository_impl.dart';
-import 'package:news_reader_app/domain/usecases/openUrlLaunch.dart';
+import 'package:news_reader_app/domain/usecases/open_url_launch.dart';
 import 'package:news_reader_app/presentation/text/app_textStyle.dart';
 
 class TextUriButton extends StatelessWidget {
