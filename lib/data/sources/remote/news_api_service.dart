@@ -76,16 +76,6 @@ class NewsApiService {
   }
 
   Future<List<ArticleModel>> getSearchArticles(String searchString) async {
-    print("getSearchArticles start() ");
-
-    final uri = Uri.https("newsapi.org", "/v2/everything", {
-      'q': searchString,
-      'sortBy': 'publishedAt',
-      'apiKey': ApiConstants.apiKey,
-    },);
-    print("최종 요청 URL: $uri");
-
-
     final response = await _dio.get(
       '${ApiConstants.baseUrl}/everything',
       queryParameters: {

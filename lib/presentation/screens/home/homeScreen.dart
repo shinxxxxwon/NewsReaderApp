@@ -10,28 +10,45 @@ import '../../providers/news_provider.dart';
 import '../../providers/home_menu_provider.dart';
 import '../../widgets/article_card.dart';
 
-class HomeScreen extends ConsumerWidget {
-  HomeScreen({super.key});
+class HomeScreen extends ConsumerStatefulWidget{
+  const HomeScreen({super.key});
+  
+  @override
+  HomeScreenState createState() => HomeScreenState();
+}
 
+class HomeScreenState extends ConsumerState<HomeScreen>{
   final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    _searchController.clear();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   String getAppBarTitle(int type){
     switch(type){
       case ApiConstants.topHeadLine :
-      return 'Top Headlines';
+        return 'Top Headlines';
       case ApiConstants.bitCoin :
-      return 'BitCoin';
+        return 'BitCoin';
       case ApiConstants.apple :
-      return 'Apple';
+        return 'Apple';
       case ApiConstants.techCrunchAndTheNextWeb :
-      return 'Tech Crunch And The Next Web';
+        return 'Tech Crunch And The Next Web';
       default:
-      return 'Top Headlines';
+        return 'Top Headlines';
     }
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final articleState = ref.watch(articleProvider);
     final searchState = ref.watch(searchProvider);
     final isMenuVisible = ref.watch(homeMenuProvider);
@@ -40,7 +57,6 @@ class HomeScreen extends ConsumerWidget {
 
     final AppColor appColor = AppColor();
     final size = MediaQuery.of(context).size;
-    final searchText = _searchController.text;
 
 
     return Scaffold(
@@ -55,23 +71,22 @@ class HomeScreen extends ConsumerWidget {
             );
           },
           child: isSearchVisible ?
-              TextField(
-                key: const ValueKey("search_text_filed"),
-                controller: _searchController,
-                decoration: const InputDecoration(
-                  hintText: "Search...",
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey), // 기본 밑줄 색
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2), // 포커스 시 색상 & 두께
-                  ),
-                ),
-                onChanged: (value) {
-                  print("TextField onChanged()");
-                  ref.read(searchTextProvider.notifier).state = value;
-                },
-              ) :
+          TextField(
+            key: const ValueKey("search_text_filed"),
+            controller: _searchController,
+            decoration: const InputDecoration(
+              hintText: "Search...",
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey), // 기본 밑줄 색
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 2), // 포커스 시 색상 & 두께
+              ),
+            ),
+            onChanged: (value) {
+              ref.read(searchTextProvider.notifier).state = value;
+            },
+          ) :
           Text(
             getAppBarTitle(selectedType),
             key: const ValueKey("app_bar_title_text"),
@@ -88,6 +103,7 @@ class HomeScreen extends ConsumerWidget {
                 color: appColor.white
             ),
             onPressed: () {
+              _searchController.clear();
               ref.read(searchBarProvider.notifier).toggle();
             },
           ),
@@ -181,5 +197,5 @@ class HomeScreen extends ConsumerWidget {
       ),
     );
   }
-
 }
+
