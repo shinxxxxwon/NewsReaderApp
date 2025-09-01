@@ -33,7 +33,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final articleState = ref.watch(articleProvider);
-    final searchState = ref.watch(searchProvider(""));
+    final searchState = ref.watch(searchProvider);
     final isMenuVisible = ref.watch(homeMenuProvider);
     final isSearchVisible = ref.watch(searchBarProvider);
     final selectedType = ref.watch(selectedTypeProvider);
@@ -68,6 +68,7 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
                 onChanged: (value) {
+                  print("TextField onChanged()");
                   ref.read(searchTextProvider.notifier).state = value;
                 },
               ) :
@@ -95,7 +96,7 @@ class HomeScreen extends ConsumerWidget {
       body: Stack(
         children: [
           //Top headline news
-          // _searchController.text.isEmpty ?
+          _searchController.text.isEmpty ?
           articleState.when(
             data: (articles) => ListView.builder(
               itemCount: articles.length,
@@ -110,23 +111,22 @@ class HomeScreen extends ConsumerWidget {
             ),
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, _) => Center(child: Text("Error: $err")),
+          ) :
+          searchState.when(
+            data: (articles) => ListView.builder(
+              itemCount: articles.length,
+              itemBuilder: (context, index) =>
+                  ArticleCard(
+                      article: articles[index],
+                      onTap: () => context.push(
+                        AppRouter.routeDetail,
+                        extra: articles[index],
+                      )
+                  ),
+            ),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (err, _) => Center(child: Text("Error: $err")),
           ),
-          //     :
-          // searchState.when(
-          //   data: (articles) => ListView.builder(
-          //     itemCount: articles.length,
-          //     itemBuilder: (context, index) =>
-          //         ArticleCard(
-          //             article: articles[index],
-          //             onTap: () => context.push(
-          //               AppRouter.routeDetail,
-          //               extra: articles[index],
-          //             )
-          //         ),
-          //   ),
-          //   loading: () => const Center(child: CircularProgressIndicator()),
-          //   error: (err, _) => Center(child: Text("Error: $err")),
-          // ),
 
           //메뉴 시트
           LeftSheet(

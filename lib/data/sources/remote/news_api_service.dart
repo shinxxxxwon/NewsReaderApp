@@ -7,14 +7,6 @@ class NewsApiService {
 
   // Top Headlines 가져오기
   Future<List<ArticleModel>> getTopHeadlines({String country = 'us'}) async {
-    print("getTopHeadlines call()");
-
-    final uri = Uri.https("newsapi.org", "/v2/top-headlines", {
-      'country': country,
-      'apiKey': ApiConstants.apiKey,
-    },);
-    print("최종 요청 URL: $uri");
-
     final response = await _dio.get(
       '${ApiConstants.baseUrl}/top-headlines',
       queryParameters: {
@@ -45,7 +37,7 @@ class NewsApiService {
       final List data = response.data['articles'];
       return data.map((json) => ArticleModel.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to fetch top headlines');
+      throw Exception('Failed to fetch Bit Coin');
     }
   }
 
@@ -62,7 +54,7 @@ class NewsApiService {
       final List data = response.data['articles'];
       return data.map((json) => ArticleModel.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to fetch top headlines');
+      throw Exception('Failed to fetch Apple');
     }
   }
 
@@ -79,30 +71,35 @@ class NewsApiService {
       final List data = response.data['articles'];
       return data.map((json) => ArticleModel.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to fetch top headlines');
+      throw Exception('Failed to fetch TechcrunchAndTheNextWeb');
     }
   }
 
   Future<List<ArticleModel>> getSearchArticles(String searchString) async {
-    getSearchArticles("get api");
+    print("getSearchArticles start() ");
+
+    final uri = Uri.https("newsapi.org", "/v2/everything", {
+      'q': searchString,
+      'sortBy': 'publishedAt',
+      'apiKey': ApiConstants.apiKey,
+    },);
+    print("최종 요청 URL: $uri");
+
 
     final response = await _dio.get(
       '${ApiConstants.baseUrl}/everything',
       queryParameters: {
         'q': searchString,
-        'language': 'en',
         'sortBy': 'publishedAt',
         'apiKey': ApiConstants.apiKey,
       },
     );
 
-    print("response uri : ${response.statusCode ?? -1}");
-
     if (response.statusCode == 200) {
       final List data = response.data['articles'];
       return data.map((json) => ArticleModel.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to fetch top headlines');
+      throw Exception('Failed to fetch $searchString');
     }
   }
 }

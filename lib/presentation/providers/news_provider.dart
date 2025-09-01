@@ -8,7 +8,7 @@ final selectedTypeProvider = StateProvider<int>((ref) => 0);
 
 final searchTextProvider = StateProvider<String>((ref) => "");
 
-final searchProvider = FutureProvider.family<List<Article>, String>((ref, searchString) async {
+final searchProvider = FutureProvider<List<Article>>((ref) async {
   final searchText = ref.watch(searchTextProvider);
   final getArticles = ref.read(getArticlesUseCaseProvider);
 
@@ -16,7 +16,7 @@ final searchProvider = FutureProvider.family<List<Article>, String>((ref, search
     final type = ref.watch(selectedTypeProvider);
     return await getArticles.getArticle(type);
   }
-  return await getArticles.getSearchArticle(searchString);
+  return await getArticles.getSearchArticle(searchText);
 });
 
 final articleProvider = FutureProvider<List<Article>>((ref) async {
